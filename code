@@ -1,0 +1,42 @@
+
+@author: krishna
+"""
+import selenium
+from selenium import webdriver
+import re
+from selenium.webdriver.common.keys import Keys
+import time
+import pandas as pd
+	
+driver = webdriver.Chrome("C:\Program Files (x86)\chromedriver.exe")
+
+
+driver.get("https://www.linkedin.com/login")
+
+un=driver.find_element_by_id("username")
+
+un.send_keys("your mail")
+
+pasw=driver.find_element_by_id("password")
+pasw.send_keys("your password")
+sub_B=driver.find_element_by_class_name("login__form_action_container ")
+
+sub_B.click()
+#driver.maximize_window()
+driver.get("https://www.linkedin.com/jobs/search/")
+
+search_box=driver.find_element_by_id("jobs-search-box-keyword-id-ember32")
+search_box.send_keys("data analytics")
+search_box_location=driver.find_element_by_id("jobs-search-box-location-id-ember32")
+search_box_location.clear()
+search_box_location.send_keys("rajasthan")
+sub_search=driver.find_element_by_class_name("jobs-search-box__submit-button")
+sub_search.click()
+job=driver.find_element_by_class_name("artdeco-entity-lockup__title")
+c=[]
+for i in job:
+    c.append(i.text)
+    print(c)
+    print()
+    print(len(c))    
+    
